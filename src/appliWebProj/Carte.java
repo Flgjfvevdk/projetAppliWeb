@@ -9,12 +9,17 @@ public class Carte {
 	int id;
 	String nom;
 	
+	@OneToOne(mappedBy="carte")
+	Publication publication;
+	
+	
 	public Carte() {
 	}
 	
 	public Carte(String nom) {
 		this.nom = nom;
 	}
+	
 	
 	public int getId() {
 		return id;

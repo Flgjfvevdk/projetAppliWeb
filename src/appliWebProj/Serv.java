@@ -17,7 +17,9 @@ public class Serv extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
     @EJB
-    Facade facade; 
+    Facade facade;
+    
+     int nbCartesPaquet = 5;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,12 +46,20 @@ public class Serv extends HttpServlet {
 		if(operation.equals("creerCarte")) {
 			String nomCarte = request.getParameter("nomCarte");
 			facade.creerCarte(nomCarte);
-			request.getRequestDispatcher("index.html").forward(request, response);
-			
-		}if(operation.equals("listerCartes")) {
+			request.getRequestDispatcher("index.html").forward(request, response);	
+		}
+		if(operation.equals("listerCartes")) {
 			//System.out.println(facade.getListeCartes());
 			request.setAttribute("liste_c", facade.getListeCartes());
 			request.getRequestDispatcher("afficherCarte.jsp").forward(request, response);
+		}
+		if(operation.equals("acheterDeck")) {
+			request.setAttribute("cartesObtenues", facade.getPlusieursCartes(nbCartesPaquet));
+			request.getRequestDispatcher("ouverturePaquetCartes.jsp").forward(request, response);
+		}
+		if(operation.equals("afficherPublication")) {
+			request.setAttribute("listePublicat", facade.getPublications());
+			request.getRequestDispatcher("afficherListePublication.jsp").forward(request, response);
 		}
 	}
 

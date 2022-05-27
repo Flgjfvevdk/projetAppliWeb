@@ -4,17 +4,16 @@
     import="java.util.Collection"
     errorPage=""
     isThreadSafe="true"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Afficher les cartes</title>
+<title>Afficher publications</title>
 </head>
 <body>
-	<%Collection<Carte> listeCartes = (Collection<Carte>) request.getAttribute("liste_c");
-	for(Carte c : listeCartes){ %>
-		<%=c.getNom() %>
+	<%Collection<Publication> listePublications = (Collection<Publication>) request.getAttribute("listePublicat");
+	for(Publication p : listePublications){ %>
+		<%=p.getCarte().getNom() %> votes positifs : <%=p.getVotes() %> 
 		<br>
 	<%}%>
 	<br>

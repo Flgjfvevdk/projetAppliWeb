@@ -4,19 +4,20 @@
     import="java.util.Collection"
     errorPage=""
     isThreadSafe="true"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Afficher les cartes</title>
+<title>Ouverture paquet</title>
 </head>
 <body>
-	<%Collection<Carte> listeCartes = (Collection<Carte>) request.getAttribute("liste_c");
-	for(Carte c : listeCartes){ %>
+<%Collection<Carte> listeCartesObtenues = (Collection<Carte>) request.getAttribute("cartesObtenues");
+	for(Carte c : listeCartesObtenues){ %>
 		<%=c.getNom() %>
 		<br>
 	<%}%>
+	
+	
 	<br>
 	<A HREF=index.html> Retour au menu.
 	</A>
