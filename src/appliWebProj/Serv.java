@@ -93,7 +93,9 @@ public class Serv extends HttpServlet {
 			request.getRequestDispatcher("afficherCarte.jsp").forward(request, response);
 		}
 		if(operation.equals("acheterDeck")) {
-			request.setAttribute("cartesObtenues", facade.getPlusieursCartes(nbCartesPaquet));
+			//String username = ((Compte) request.getSession().getAttribute("compteActif")).getNom();
+			String username = (String) request.getSession().getAttribute("usernameActif");
+			request.setAttribute("cartesObtenues", facade.getPlusieursCartes(nbCartesPaquet,username));
 			request.getRequestDispatcher("ouverturePaquetCartes.jsp").forward(request, response);
 		}
 		if(operation.equals("afficherPublication")) {
@@ -112,7 +114,8 @@ public class Serv extends HttpServlet {
 			compteCree = facade.creerCompte(pseudo, mdp);
 			if(compteCree != null) {
 				HttpSession session = request.getSession();
-				session.setAttribute("compteActif", compteCree);
+				//session.setAttribute("compteActif", compteCree);
+				session.setAttribute("usernameActif", compteCree.getNom());
 				request.getRequestDispatcher("index.html").forward(request, response);
 			} else {
 				request.setAttribute("messageCreationCompte", "Cet username est indisponible");
@@ -127,7 +130,8 @@ public class Serv extends HttpServlet {
 			compte = facade.connexionValide(pseudo, mdp);
 			if(compte != null) {
 				HttpSession session = request.getSession();
-				session.setAttribute("compteActif", compte);
+				//session.setAttribute("compteActif", compte);
+				session.setAttribute("usernameActif", compte.getNom());
 				request.getRequestDispatcher("index.html").forward(request, response);
 			} else {
 				request.setAttribute("messageCreationCompte", "Bienvenue, vous pouvez créez un compte juste en dessous !");
@@ -140,6 +144,12 @@ public class Serv extends HttpServlet {
 			request.getRequestDispatcher("index.html").forward(request, response);	
 		}
 		if(operation.equals("afficherPossession")) {
+			//Compte c = (Compte) request.getSession().getAttribute("compteActif");
+			String username = (String) request.getSession().getAttribute("usernameActif");
+			//request.setAttribute("cartePossedee", facade.getCarteCompte(c.getNom()));
+			//request.setAttribute("cartePossedee", facade.getCarteCompte(username));
+			request.setAttribute("cartePossedee", facade.getCompte(username).getCartes());
+			request.setAttribute("argents", facade.getCompte(username).getArgent());
 			request.getRequestDispatcher("afficherPossession.jsp").forward(request, response);
 		}
 	}

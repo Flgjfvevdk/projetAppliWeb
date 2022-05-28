@@ -1,5 +1,7 @@
 package appliWebProj;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,9 @@ public class Carte {
 	
 	@OneToOne(mappedBy="carte")
 	Publication publication;
+	
+	@ManyToMany(mappedBy="cartes")
+	List<Compte> comptes;
 	
 	
 	public Carte() {

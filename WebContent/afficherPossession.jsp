@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     import="appliWebProj.*"
     import="java.util.Collection"
+    import="java.lang.*"
     errorPage=""
     isThreadSafe="true"%>
 <!DOCTYPE html>
@@ -11,13 +12,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
-if(compteActif != null){%>
-	Jeton(s) disponibles : <%=compteActif.getArgent() %>
+<% //Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
+String usernameActif = (String) request.getSession().getAttribute("usernameActif");
+if(usernameActif != null){%>
+	Jeton(s) disponibles : <%=(int) request.getAttribute("argents") %>
 	<br>
 	Vos cartes possédées : 
-	<%for(Carte c : compteActif.getCartes()){ %>
-		<%=c.getNom() %>
+	<%
+	Collection<Carte> cartesPossedees = (Collection<Carte>) request.getAttribute("cartePossedee");
+	//Collection<Carte> cartesPossedees = ((Compte) request.getSession().getAttribute("compteActif")).getCartes();
+	for(Carte c : cartesPossedees){ %>
+		<%=c.getNom()%>
 		<br>
 	<%}%>
 	

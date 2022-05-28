@@ -11,8 +11,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
-if(compteActif != null){%>
+<% //Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
+String usernameActif = (String) request.getSession().getAttribute("usernameActif");
+if(usernameActif != null){%>
 	<form action="Serv" method ="post" enctype="multipart/form-data">
 	nom : <input type="text" name="nomCarte"> <br>
 	image : <input type="file" name="imageCarte"> <br>

@@ -11,12 +11,20 @@
 <title>Ouverture paquet</title>
 </head>
 <body>
-<%Collection<Carte> listeCartesObtenues = (Collection<Carte>) request.getAttribute("cartesObtenues");
+
+<% //Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
+String usernameActif = (String) request.getSession().getAttribute("usernameActif");
+if(usernameActif != null){%>
+	<%Collection<Carte> listeCartesObtenues = (Collection<Carte>) request.getAttribute("cartesObtenues");
 	for(Carte c : listeCartesObtenues){ %>
 		<%=c.getNom() %>
 		<br>
 	<%}%>
 	
+<%}else {%>
+	Vous devez être connecté pour consulter vos possessions.
+
+<%} %>
 	
 	<br>
 	<A HREF=index.html> Retour au menu.

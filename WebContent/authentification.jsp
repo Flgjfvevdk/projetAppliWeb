@@ -11,9 +11,10 @@
 <title>Authentification</title>
 </head>
 <body>
-<% Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
-if(compteActif != null){%>
-	Vous êtes déjà connecté, et vous êtes : <%=compteActif.getNom() %>
+<% //Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
+String usernameActif = (String) request.getSession().getAttribute("usernameActif");
+if(usernameActif != null){%>
+	Vous êtes déjà connecté en tant que : <%=usernameActif %>
 	<form action="Serv" method ="post">
 	<input type="submit" name="operation" value="seDeconnecter">
 	</form>

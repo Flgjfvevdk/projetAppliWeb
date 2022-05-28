@@ -1,6 +1,7 @@
 package appliWebProj;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ public class Compte {
 	
 	int argent;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	List<Carte> cartes;
 	@OneToMany
 	List<Deck> decks;
@@ -39,7 +40,12 @@ public class Compte {
 	}
 	
 	public void ajouterCarte(Carte c) {
-		cartes.add(c);
+		if(cartes.contains(c)) {
+			argent ++;
+		}else {
+			cartes.add(c);
+		}
+		
 	}
 	public String getMotDePasse() {
 		return this.motDePasse;
@@ -54,8 +60,6 @@ public class Compte {
 	}
 	
 	public List<Carte> getCartes(){
-		System.out.println("\n\n"+ cartes.size() +"\n\n");
 		return this.cartes;
-		//return new ArrayList<Carte>();
 	}
 }

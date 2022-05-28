@@ -17,6 +17,7 @@ public class Facade {
 		Publication p = new Publication(c);
 		em.persist(c);
 		em.persist(p);
+		
 	}
 	
 	public Compte creerCompte(String username, String mdp){
@@ -62,8 +63,32 @@ public class Facade {
 		return cartesRenvoies;
 	}
 	
+	public Collection<Carte> getPlusieursCartes(int nbCartes, String username){
+		String requete = "SELECT c FROM Compte c WHERE c.nom='"+username+"'";
+		TypedQuery<Compte> rq = em.createQuery(requete, Compte.class);
+		Compte compteActif = rq.getResultList().get(0);
+		
+		Collection<Carte> cartesRenvoies = new ArrayList<Carte>();
+		for(int k = 0; k < nbCartes; k++) {
+			Carte carte = getRandomCarte();
+			cartesRenvoies.add(carte);
+			compteActif.ajouterCarte(carte);
+		}
+		em.persist(compteActif);
+		return cartesRenvoies;
+	}
+	
 	public Collection<Publication> getPublications(){
 		TypedQuery<Publication> req = em.createQuery("select p from Publication p",Publication.class);
 		return req.getResultList();
+	}
+	
+	
+	public Compte getCompte(String username){
+		String requete = "SELECT c FROM Compte c WHERE c.nom='"+username+"'";
+		TypedQuery<Compte> rq = em.createQuery(requete, Compte.class);
+		Compte c = rq.getResultList().get(0);
+		
+		return c;
 	}
 }
