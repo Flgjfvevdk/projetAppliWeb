@@ -8,6 +8,7 @@ public class Carte {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int id;
 	String nom;
+	String image;
 	
 	@OneToOne(mappedBy="carte")
 	Publication publication;
@@ -16,8 +17,9 @@ public class Carte {
 	public Carte() {
 	}
 	
-	public Carte(String nom) {
+	public Carte(String nom, String image) {
 		this.nom = nom;
+		this.image = image;
 	}
 	
 	
@@ -32,6 +34,22 @@ public class Carte {
 	}
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public Publication getPublication() {
+		return publication;
+	}
+
+	public void setPublication(Publication publication) {
+		this.publication = publication;
 	}
 	
 

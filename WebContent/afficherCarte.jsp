@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     import="appliWebProj.*"
     import="java.util.Collection"
+    import="java.lang.*"
     errorPage=""
     isThreadSafe="true"%>
     
@@ -14,8 +15,9 @@
 <body>
 	<%Collection<Carte> listeCartes = (Collection<Carte>) request.getAttribute("liste_c");
 	for(Carte c : listeCartes){ %>
-		<%=c.getNom() %>
-		<br>
+		<%=c.getNom() %><br>
+		
+		
 	<%}%>
 	<br>
 	<A HREF=index.html> Retour au menu.

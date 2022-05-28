@@ -4,15 +4,22 @@ import java.io.IOException;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  * Servlet implementation class Serv
  */
 @WebServlet("/Serv")
+@MultipartConfig(
+		  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
+		  maxFileSize = 1024 * 1024 * 10,      // 10 MB
+		  maxRequestSize = 1024 * 1024 * 100   // 100 MB
+		)
 public class Serv extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -45,7 +52,16 @@ public class Serv extends HttpServlet {
 		System.out.println(operation);
 		if(operation.equals("creerCarte")) {
 			String nomCarte = request.getParameter("nomCarte");
-			facade.creerCarte(nomCarte);
+			//String imageCarte = request.getParameter("imageCarte");
+			Part imagePart = request.getPart("imageCarte");
+		    String nomImageCarte = imagePart.getSubmittedFileName();
+		    String chemin = "/home/baptistecombelles/EAP-7.4.0/standalone/tmp/appliWebProj.war/";
+		    for (Part part : request.getParts()) {
+		      part.write(""+nomImageCarte);
+		    }
+		    response.getWriter().print("The file uploaded sucessfully.");
+			//System.out.println(chemin+nomImageCarte);
+			facade.creerCarte(nomCarte,chemin+nomImageCarte);
 			request.getRequestDispatcher("index.html").forward(request, response);	
 		}
 		if(operation.equals("listerCartes")) {

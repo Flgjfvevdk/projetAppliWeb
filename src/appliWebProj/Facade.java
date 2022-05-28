@@ -12,8 +12,8 @@ public class Facade {
 	@PersistenceContext
 	private EntityManager em;
 	
-	public void creerCarte(String nom) {
-		Carte c = new Carte(nom);
+	public void creerCarte(String nom, String image) {
+		Carte c = new Carte(nom,image);
 		Publication p = new Publication(c);
 		em.persist(c);
 		em.persist(p);
