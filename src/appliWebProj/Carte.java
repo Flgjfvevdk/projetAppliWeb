@@ -22,6 +22,9 @@ public class Carte {
 		this.image = image;
 	}
 	
+	public Carte(String nom) {
+		this.nom = nom;
+	}
 	
 	public int getId() {
 		return id;

@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
@@ -51,6 +52,9 @@ public class Serv extends HttpServlet {
 		// TODO Auto-generated method stub
 		String operation = request.getParameter("operation");
 		System.out.println(operation);
+		if(operation.equals("ongletCreationCarte")) {
+			request.getRequestDispatcher("creationCarte.jsp").forward(request, response);
+		}
 		if(operation.equals("creerCarte")) {
 			String nomCarte = request.getParameter("nomCarte");
 			Part imagePart = request.getPart("imageCarte");
@@ -88,9 +92,11 @@ public class Serv extends HttpServlet {
 		if(operation.equals("creerCompte")) {
 			String pseudo = request.getParameter("pseudo");
 			String mdp = request.getParameter("mdp");
-			boolean reussite = true;
-			reussite = facade.creerCompte(pseudo, mdp);
-			if(reussite) {
+			Compte compteCree;
+			compteCree = facade.creerCompte(pseudo, mdp);
+			if(compteCree != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("compteActif", compteCree);
 				request.getRequestDispatcher("index.html").forward(request, response);
 			} else {
 				request.setAttribute("messageCreationCompte", "Cet username est indisponible");
@@ -101,15 +107,24 @@ public class Serv extends HttpServlet {
 		if(operation.equals("seConnecter")) {
 			String pseudo = request.getParameter("pseudo");
 			String mdp = request.getParameter("mdp");
-			boolean reussite = true;
-			reussite = facade.connexionValide(pseudo, mdp);
-			if(reussite) {
+			Compte compte;
+			compte = facade.connexionValide(pseudo, mdp);
+			if(compte != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("compteActif", compte);
 				request.getRequestDispatcher("index.html").forward(request, response);
 			} else {
 				request.setAttribute("messageCreationCompte", "Bienvenue, vous pouvez créez un compte juste en dessous !");
 				request.setAttribute("messageConnectionCompte", "Erreur de connexion, pseudo ou mdp incorrect");
 				request.getRequestDispatcher("authentification.jsp").forward(request, response);
 			}
+		}
+		if(operation.equals("seDeconnecter")) {
+			request.getSession().invalidate();
+			request.getRequestDispatcher("index.html").forward(request, response);	
+		}
+		if(operation.equals("afficherPossession")) {
+			request.getRequestDispatcher("afficherPossession.jsp").forward(request, response);
 		}
 	}
 

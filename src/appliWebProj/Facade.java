@@ -19,25 +19,25 @@ public class Facade {
 		em.persist(p);
 	}
 	
-	public boolean creerCompte(String username, String mdp){
+	public Compte creerCompte(String username, String mdp){
 		
 		String requete = "SELECT c FROM Compte c WHERE c.nom='"+username+"'";
 		TypedQuery<Compte> rq = em.createQuery(requete, Compte.class);
 		if(rq.getResultList().size() == 0){
 			Compte c = new Compte(username, mdp);
 			em.persist(c);
-			return true;
+			return c;
 		}
-		return false;
+		return null;
 	}
 	
-	public boolean connexionValide(String username, String mdp) {
+	public Compte connexionValide(String username, String mdp) {
 		String requete = "SELECT c FROM Compte c WHERE c.nom='"+username+"'";
 		TypedQuery<Compte> rq = em.createQuery(requete, Compte.class);
 		if(rq.getResultList().size() == 1 && rq.getResultList().get(0).getMotDePasse().equals(mdp)){
-			return true;
+			return rq.getResultList().get(0);
 		}
-		return false;
+		return null;
 	}
 	
 	public Collection<Carte> getListeCartes(){

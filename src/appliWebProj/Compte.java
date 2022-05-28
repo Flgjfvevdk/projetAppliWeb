@@ -44,4 +44,18 @@ public class Compte {
 	public String getMotDePasse() {
 		return this.motDePasse;
 	}
+	
+	public String getNom() {
+		return this.nom;
+	}
+	
+	public int getArgent() {
+		return this.argent;
+	}
+	
+	public List<Carte> getCartes(){
+		System.out.println("\n\n"+ cartes.size() +"\n\n");
+		return this.cartes;
+		//return new ArrayList<Carte>();
+	}
 }
