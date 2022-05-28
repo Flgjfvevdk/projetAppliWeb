@@ -80,6 +80,37 @@ public class Serv extends HttpServlet {
 			request.setAttribute("listePublicat", facade.getPublications());
 			request.getRequestDispatcher("afficherListePublication.jsp").forward(request, response);
 		}
+		if(operation.equals("authentification")) {
+			request.setAttribute("messageCreationCompte", "Bienvenue, vous pouvez créez un compte juste en dessous !");
+			request.setAttribute("messageConnectionCompte", "Déjà inscrit ? Connectez-vous");
+			request.getRequestDispatcher("authentification.jsp").forward(request, response);
+		}
+		if(operation.equals("creerCompte")) {
+			String pseudo = request.getParameter("pseudo");
+			String mdp = request.getParameter("mdp");
+			boolean reussite = true;
+			reussite = facade.creerCompte(pseudo, mdp);
+			if(reussite) {
+				request.getRequestDispatcher("index.html").forward(request, response);
+			} else {
+				request.setAttribute("messageCreationCompte", "Cet username est indisponible");
+				request.setAttribute("messageConnectionCompte", "Déjà inscrit ? Connectez-vous");
+				request.getRequestDispatcher("authentification.jsp").forward(request, response);
+			}
+		}
+		if(operation.equals("seConnecter")) {
+			String pseudo = request.getParameter("pseudo");
+			String mdp = request.getParameter("mdp");
+			boolean reussite = true;
+			reussite = facade.connexionValide(pseudo, mdp);
+			if(reussite) {
+				request.getRequestDispatcher("index.html").forward(request, response);
+			} else {
+				request.setAttribute("messageCreationCompte", "Bienvenue, vous pouvez créez un compte juste en dessous !");
+				request.setAttribute("messageConnectionCompte", "Erreur de connexion, pseudo ou mdp incorrect");
+				request.getRequestDispatcher("authentification.jsp").forward(request, response);
+			}
+		}
 	}
 
 }

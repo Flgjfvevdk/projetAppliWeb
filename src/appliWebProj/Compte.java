@@ -1,5 +1,6 @@
 package appliWebProj;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ public class Compte {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int id;
 	String nom;
+	String motDePasse;
 	
 	int argent;
 	
@@ -28,8 +30,18 @@ public class Compte {
 	public Compte() {
 	}
 	
-	public Compte(String nom) {
+	public Compte(String nom, String mdp) {
 		this.nom = nom;
+		this.motDePasse = mdp;
 		this.argent = 0;
+		this.cartes = new ArrayList<Carte>();
+		this.decks = new ArrayList<Deck>();
+	}
+	
+	public void ajouterCarte(Carte c) {
+		cartes.add(c);
+	}
+	public String getMotDePasse() {
+		return this.motDePasse;
 	}
 }
