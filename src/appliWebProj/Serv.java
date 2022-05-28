@@ -72,9 +72,14 @@ public class Serv extends HttpServlet {
 	        //Collection<Part> img = request.getParts();
 	        System.out.println("TEST" +  imagesDir.getPath() + "!=" + imagesDir);
 	        if(!(new File(imagesDir.getPath() + "/" +nomImageCarte)).exists()) {
-	                for (Part part : request.getParts()) {
-	                  part.write(imagesDir.getPath()+ "/" + nomCarte.replaceAll("[^A-Za-z0-9]", "") + "." + extension);
-	                }
+	                /*for (Part part : request.getParts()) {
+	                	System.out.println("\n\n"+imagesDir.getPath()+ "/" + nomCarte.replaceAll("[^A-Za-z0-9]", "") + "." + extension+ "\n\n");
+	                	part.write(imagesDir.getPath()+ "/" + nomCarte.replaceAll("[^A-Za-z0-9]", "") + "." + extension);
+	                	System.out.println("\n\n ca marche\n\n");
+	                }*/
+	        		System.out.println("\n\n"+imagesDir.getPath()+ "/" + nomCarte.replaceAll("[^A-Za-z0-9]", "") + "." + extension+ "\n\n");
+	                imagePart.write(imagesDir.getPath()+ "/" + nomCarte.replaceAll("[^A-Za-z0-9]", "") + "." + extension);
+	                System.out.println("\n\n ca marche\n\n");
 	                response.getWriter().print("The file uploaded sucessfully.");
 	                    
 	
