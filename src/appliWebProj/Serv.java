@@ -69,11 +69,11 @@ public class Serv extends HttpServlet {
 	        String[] imageSubList = nomImageCarte.split("\\.");
 	        String extension = imageSubList.length>0?imageSubList[imageSubList.length-1]:"webp"; //pas beau et pas robuste
 	        
-	        System.out.println(nomImageCarte.split(".").toString());
 	        //Collection<Part> img = request.getParts();
-	        if(!(new File(imagesDir+ "/" +nomImageCarte)).exists()) {
+	        System.out.println("TEST" +  imagesDir.getPath() + "!=" + imagesDir);
+	        if(!(new File(imagesDir.getPath() + "/" +nomImageCarte)).exists()) {
 	                for (Part part : request.getParts()) {
-	                  part.write(imagesDir+ "/" + nomCarte.replaceAll("[^A-Za-z0-9]", "") + "." + extension);
+	                  part.write(imagesDir.getPath()+ "/" + nomCarte.replaceAll("[^A-Za-z0-9]", "") + "." + extension);
 	                }
 	                response.getWriter().print("The file uploaded sucessfully.");
 	                    
