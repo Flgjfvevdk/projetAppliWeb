@@ -2,6 +2,8 @@ package appliWebProj;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Collection;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -58,17 +60,25 @@ public class Serv extends HttpServlet {
 		if(operation.equals("creerCarte")) {
 			String nomCarte = request.getParameter("nomCarte");
 			Part imagePart = request.getPart("imageCarte");
+			
 		    String nomImageCarte = imagePart.getSubmittedFileName();
 		    File imagesDir = new File(System.getProperty("jboss.server.data.dir"), "imagesCarte");
 		    imagesDir.mkdir();
-		    for (Part part : request.getParts()) {
-		      part.write(imagesDir+ "/" +nomImageCarte);
+		    
+		    String[] imageSubList = nomImageCarte.split("\\.");
+		    String extension = imageSubList.length>0?imageSubList[imageSubList.length-1]:"webp"; //pas beau et pas robuste
+		    
+		    System.out.println(nomImageCarte.split(".").toString());
+		    //Collection<Part> img = request.getParts();
+		    if(!(new File(imagesDir+ "/" +nomImageCarte)).exists()) {
+			    for (Part part : request.getParts()) {
+			      part.write(imagesDir+ "/" + nomCarte.replaceAll("[^A-Za-z0-9]", "") + "." + extension);
+			    }
+			    response.getWriter().print("The file uploaded sucessfully.");
+				
+	
+				facade.creerCarte(nomCarte,"/appliWebProj/Images/" + nomCarte.replaceAll("[^A-Za-z0-9]", "") + "." + extension);
 		    }
-		    response.getWriter().print("The file uploaded sucessfully.");
-			System.out.println("\n\n");
-		    System.out.println(imagesDir + "/" + nomImageCarte);
-
-			facade.creerCarte(nomCarte,imagesDir + "/" + nomImageCarte);
 			request.getRequestDispatcher("index.html").forward(request, response);	
 		}
 		if(operation.equals("listerCartes")) {
