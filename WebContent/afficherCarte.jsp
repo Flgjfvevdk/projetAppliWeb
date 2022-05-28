@@ -16,7 +16,7 @@
 	<%Collection<Carte> listeCartes = (Collection<Carte>) request.getAttribute("liste_c");
 	for(Carte c : listeCartes){ %>
 		<%=c.getNom() %><br>
-		
+		<img alt="La carte" src="data/cardRin.jpg">
 		
 	<%}%>
 	<br>

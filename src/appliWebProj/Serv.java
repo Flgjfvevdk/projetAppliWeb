@@ -1,5 +1,6 @@
 package appliWebProj;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.ejb.EJB;
@@ -52,16 +53,18 @@ public class Serv extends HttpServlet {
 		System.out.println(operation);
 		if(operation.equals("creerCarte")) {
 			String nomCarte = request.getParameter("nomCarte");
-			//String imageCarte = request.getParameter("imageCarte");
 			Part imagePart = request.getPart("imageCarte");
 		    String nomImageCarte = imagePart.getSubmittedFileName();
-		    String chemin = "/home/baptistecombelles/EAP-7.4.0/standalone/tmp/appliWebProj.war/";
+		    File imagesDir = new File(System.getProperty("jboss.server.data.dir"), "imagesCarte");
+		    imagesDir.mkdir();
 		    for (Part part : request.getParts()) {
-		      part.write(""+nomImageCarte);
+		      part.write(imagesDir+ "/" +nomImageCarte);
 		    }
 		    response.getWriter().print("The file uploaded sucessfully.");
-			//System.out.println(chemin+nomImageCarte);
-			facade.creerCarte(nomCarte,chemin+nomImageCarte);
+			System.out.println("\n\n");
+		    System.out.println(imagesDir + "/" + nomImageCarte);
+
+			facade.creerCarte(nomCarte,imagesDir + "/" + nomImageCarte);
 			request.getRequestDispatcher("index.html").forward(request, response);	
 		}
 		if(operation.equals("listerCartes")) {
