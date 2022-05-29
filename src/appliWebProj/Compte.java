@@ -59,6 +59,17 @@ public class Compte {
 		return this.argent;
 	}
 	
+	public List<Deck> getDecks() {
+		return this.decks;
+	}
+	
+	public void setDecks(List<Deck> decks) {
+		this.decks = decks;
+	}
+	public void addDeck(Deck d) {
+		decks.add(d);
+	}
+	
 	public List<Carte> getCartes(){
 		return this.cartes;
 	}
