@@ -12,6 +12,7 @@
 <title>Afficher les decks</title>
 </head>
 <body>
+<script id="replace_with_navbar" src="navbar.js" ></script>
 <form method = "post" action = "Serv">
 	<% int first = 1;
 	Collection<Deck> listeDecks = (Collection<Deck>) request.getAttribute("liste_d");

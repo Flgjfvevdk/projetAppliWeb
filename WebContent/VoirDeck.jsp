@@ -23,7 +23,7 @@
 		
 	<%}%>
 	<br>
-	<form method = "post" action="Servt">
+	<form method = "post" action="Serv">
 	<input type = "hidden" value ="ajouterADeck" name = "operation">
 	<input type = "submit" value = "Ajouter une carte">
 	</form>

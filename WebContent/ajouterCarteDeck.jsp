@@ -12,6 +12,7 @@
 <title>Ajouter carte dans deck</title>
 </head>
 <body>
+<script id="replace_with_navbar" src="navbar.js" ></script>
 <form method = "post" action = "Serv">
 	<% int first = 1;
 	Collection<Carte> listeCartesPossedees = (Collection<Carte>) request.getAttribute("liste_c");

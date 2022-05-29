@@ -15,6 +15,9 @@ public class Message {
 	@ManyToOne(fetch = FetchType.EAGER)
 	Publication publication;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	Topic topic;
+	
 	public Message() {
 	}
 	
@@ -22,6 +25,11 @@ public class Message {
 		texte = messages;
 		this.proprietaire = c;
 		this.publication = p;
+	}
+	public Message(String messages, Compte c, Topic t) {
+		texte = messages;
+		this.proprietaire = c;
+		this.topic = t;
 	}
 	
 	public String getTexte() {

@@ -24,14 +24,6 @@ public class Facade {
 		
 	}
 	
-	public void creerDeck(String nom, String usernameCreateur) {
-		String requete = "SELECT c FROM Compte c WHERE c.nom='"+usernameCreateur+"'";
-		TypedQuery<Compte> rq = em.createQuery(requete, Compte.class);
-		Compte createur = rq.getResultList().get(0);
-		Deck d = new Deck(nom);
-		em.persist(d);		
-	}
-	
 	public Compte creerCompte(String username, String mdp){
 		
 		String requete = "SELECT c FROM Compte c WHERE c.nom='"+username+"'";
@@ -153,7 +145,6 @@ public class Facade {
 	public Collection<Deck> getListeDeck(String username){
 		String requete = "SELECT d FROM Deck d WHERE d.proprietaire.nom='"+username+"'";
 		TypedQuery<Deck> rq = em.createQuery(requete, Deck.class);
-		System.out.println("\n\n\n"+ rq.getResultList().size() + "\n\n");
 		return rq.getResultList();
 	}
 	
@@ -162,5 +153,17 @@ public class Facade {
 		Deck d = new Deck(nom, cp);
 		em.persist(cp);
 		em.persist(d);
+	}
+	public void ajouterCarteADeck(int idCarte, int idDeck) {
+		String requete = "SELECT d FROM Deck d WHERE d.id='"+idDeck+"'";
+		TypedQuery<Deck> rq = em.createQuery(requete, Deck.class);
+		Deck d = rq.getResultList().get(0);
+		String requete2 = "SELECT c FROM Carte c WHERE c.id='"+idCarte+"'";
+		TypedQuery<Carte> rq2 = em.createQuery(requete2, Carte.class);
+		Carte carte = rq2.getResultList().get(0);
+		d.AddCarte(carte);
+		em.persist(d);
+		em.persist(carte);
+		
 	}
 }

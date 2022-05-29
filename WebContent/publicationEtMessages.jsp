@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="publicationEtMessages.css">
 </head>
 <body>
+<script id="replace_with_navbar" src="navbar.js" ></script>
 <%Publication publication = (Publication) request.getAttribute("publication");
 %>
 Publication de la carte : <%=publication.getNomCarte() %>

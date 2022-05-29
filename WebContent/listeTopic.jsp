@@ -8,31 +8,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Afficher publications</title>
+<title>Topic</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="afficherListePublication.css">
 </head>
 <body>
 <script id="replace_with_navbar" src="navbar.js"></script>
 	<%
-	Collection<Publication> listePublications = (Collection<Publication>) request.getAttribute("listePublicat");
+	Collection<Topic> listeTopic = (Collection<Topic>) request.getAttribute("listeTopic");
 		
-	for(Publication p : listePublications){ %>
+	for(Topic t : listeTopic){ %>
 	<form action="Serv" method ="post">
-		<%=p.getCarte().getNom() %> 
+		<%=t.getTitre() %>
 		<br>
-		votes positifs : <%=p.getVotes() %> 
+		<%=t.getNomCreateur() %> 
 		<br>
-		Créée par : <%=p.getNomCreateur() %>
-		<br>
-		<input type="hidden" name="cible" value=<%=p.getId()%>>
+		<input type="hidden" name="cible" value=<%=t.getId()%>>
 		<input type="submit" name="operation" value="afficherDetailsPublication">
-		<%String usernameActif = (String) request.getSession().getAttribute("usernameActif");
-		if(usernameActif != null && !p.userAlreadyUpvote(usernameActif)){
-			%>
+		<%String usernameActif = (String) request.getSession().getAttribute("usernameActif");%>
 		
-		<input type="submit" name="operation" value="upVote">
-		<%} %>
 	</form>
 		<br><br>
 	<%}%>

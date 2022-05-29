@@ -114,6 +114,7 @@ public class Serv extends HttpServlet {
 		}
 		if(operation.equals("afficherPublication")) {
 			request.setAttribute("listePublicat", facade.getPublications());
+			System.out.println("\n\neuh\n\n");
 			request.getRequestDispatcher("afficherListePublication.jsp").forward(request, response);
 		}
 		if(operation.equals("authentification")) {
@@ -196,13 +197,14 @@ public class Serv extends HttpServlet {
 		}
 		if (operation.equals("VoirDeck")){
 			System.out.println("\n\n On veut voir un deck \n\n");
-			//System.out.println(facade.getListeCartes());
+
 			Collection<Deck> ds =facade.getListeDeck((String) request.getSession().getAttribute("usernameActif"));
 			Deck AVoir = null;
 			int IdATrouver = Integer.parseInt(request.getParameter("deckId"));
 			for (Deck d:ds) {
 				if (d.getId()==IdATrouver) {
 					AVoir = d;
+					request.getSession().setAttribute("idDeckActif", d.getId());
 				}
 			}
 			request.setAttribute("deck", AVoir);
@@ -218,7 +220,6 @@ public class Serv extends HttpServlet {
 			String username = (String) request.getSession().getAttribute("usernameActif");
 			String nom = (String) request.getParameter("nomDeck");
 			facade.ajouterDeck(username,nom);
-			
 			request.getRequestDispatcher("index.html").forward(request, response);
 		}
 		if (operation.equals("ajouterADeck")){
@@ -230,11 +231,14 @@ public class Serv extends HttpServlet {
 		if(operation.equals("ajouterLaCarte")){
 			System.out.println("\n\n On veut ajouter la carte dans un deck \n\n");
 			int idCarte = Integer.parseInt(request.getParameter("carteId"));
-			
-			String username = (String) request.getSession().getAttribute("usernameActif");
-			request.setAttribute("liste_c", facade.getCompte(username).getCartes());
-			request.getRequestDispatcher("ajouterCarteDeck.jsp").forward(request, response);
+			int idDeck = (int) request.getSession().getAttribute("idDeckActif");
+			//String username = (String) request.getSession().getAttribute("usernameActif");
+			System.out.println("\n\n yes \n\n");
+			facade.ajouterCarteADeck(idCarte, idDeck);
+			System.out.println("\n\n non \n\n");
+			request.getRequestDispatcher("index.html").forward(request, response);
 		}
+		
 	}
 
 }

@@ -1,5 +1,6 @@
 package appliWebProj;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -20,12 +21,11 @@ public class Deck {
 	public Deck() {
 	}
 	
-	public Deck(String nom) {
-		this.nom = nom;
-	}
+	
 	public Deck(String nom, Compte c) {
 		this.nom = nom;
 		this.proprietaire = c;
+		this.cartes = new ArrayList<Carte>();
 	}
 	public int getId() {
 		return id;
