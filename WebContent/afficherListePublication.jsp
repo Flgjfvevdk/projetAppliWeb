@@ -13,8 +13,22 @@
 <body>
 	<%Collection<Publication> listePublications = (Collection<Publication>) request.getAttribute("listePublicat");
 	for(Publication p : listePublications){ %>
-		<%=p.getCarte().getNom() %> votes positifs : <%=p.getVotes() %> 
+	<form action="Serv" method ="post">
+		<%=p.getCarte().getNom() %> 
 		<br>
+		votes positifs : <%=p.getVotes() %> 
+		<br>
+		Créée par : <%=p.getNomCreateur() %>
+		<br>
+		<%String usernameActif = (String) request.getSession().getAttribute("usernameActif");
+		if(usernameActif != null && !p.userAlreadyUpvote(usernameActif)){
+			%>
+		
+		<input type="hidden" name="cible" value=<%=p.getId()%>>
+		<input type="submit" name="operation" value="upVote">
+		<%} %>
+	</form>
+		<br><br>
 	<%}%>
 	<br>
 	<A HREF=index.html> Retour au menu.

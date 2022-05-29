@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Afficher possession</title>
 </head>
 <body>
 <% //Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");

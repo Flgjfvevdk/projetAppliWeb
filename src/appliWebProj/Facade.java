@@ -1,5 +1,6 @@
 package appliWebProj;
 
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
@@ -12,9 +13,12 @@ public class Facade {
 	@PersistenceContext
 	private EntityManager em;
 	
-	public void creerCarte(String nom, String image) {
+	public void creerCarte(String nom, String image, String usernameCreateur) {
+		String requete = "SELECT c FROM Compte c WHERE c.nom='"+usernameCreateur+"'";
+		TypedQuery<Compte> rq = em.createQuery(requete, Compte.class);
+		Compte createur = rq.getResultList().get(0);
 		Carte c = new Carte(nom,image);
-		Publication p = new Publication(c);
+		Publication p = new Publication(c, createur);
 		em.persist(c);
 		em.persist(p);
 		
@@ -83,6 +87,18 @@ public class Facade {
 		return req.getResultList();
 	}
 	
+	public void upVotePublication(int id, String usernameUpvoter) {
+		TypedQuery<Publication> req = em.createQuery("select p from Publication p WHERE p.id='"+id+"'",Publication.class);
+		System.out.println("\n\n" + req.getResultList().size() + "\n\n");
+		ArrayList<Publication> resultat = (ArrayList<Publication>)req.getResultList();
+		if(resultat.size() > 0) {
+			resultat.get(0).incrementVotes(usernameUpvoter);
+			//resultat.get(0).incrementVotes();
+		} else {
+			System.out.println("\nErreur dans la procédure d'upvote\n");
+		}
+	}
+	
 	
 	public Compte getCompte(String username){
 		String requete = "SELECT c FROM Compte c WHERE c.nom='"+username+"'";
@@ -90,5 +106,14 @@ public class Facade {
 		Compte c = rq.getResultList().get(0);
 		
 		return c;
+	}
+	public void ajouterArgentCompte(String username, int valeur) {
+		String requete = "SELECT c FROM Compte c WHERE c.nom='"+username+"'";
+		TypedQuery<Compte> rq = em.createQuery(requete, Compte.class);
+		if(rq.getResultList().size() > 0) {
+			Compte c = rq.getResultList().get(0);
+			c.addArgent(valeur);
+			em.persist(c);
+		}
 	}
 }

@@ -18,6 +18,7 @@ public class Carte {
 	@ManyToMany(mappedBy="cartes")
 	List<Compte> comptes;
 	
+	public static int prixPaquet = 7;
 	
 	public Carte() {
 	}

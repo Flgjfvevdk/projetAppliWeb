@@ -82,8 +82,8 @@ public class Serv extends HttpServlet {
 	                System.out.println("\n\n ca marche\n\n");
 	                response.getWriter().print("The file uploaded sucessfully.");
 	                    
-	
-	                    facade.creerCarte(nomCarte,"/appliWebProj/Images/" + nomCarte.replaceAll("[^A-Za-z0-9]", "") + "." + extension);
+	                String username = (String) request.getSession().getAttribute("usernameActif");
+	                facade.creerCarte(nomCarte,"/appliWebProj/Images/" + nomCarte.replaceAll("[^A-Za-z0-9]", "") + "." + extension, username);
 	        }
             request.getRequestDispatcher("index.html").forward(request, response); 
 		}
@@ -95,7 +95,21 @@ public class Serv extends HttpServlet {
 		if(operation.equals("acheterDeck")) {
 			//String username = ((Compte) request.getSession().getAttribute("compteActif")).getNom();
 			String username = (String) request.getSession().getAttribute("usernameActif");
-			request.setAttribute("cartesObtenues", facade.getPlusieursCartes(nbCartesPaquet,username));
+			
+			request.setAttribute("estUserConnecte", false);
+			request.setAttribute("estCarteDisponible", false);
+			if(username != null) {
+				request.setAttribute("estUserConnecte", true);
+				request.setAttribute("argentDispo", facade.getCompte(username).getArgent());
+				if(facade.getListeCartes().size() > 0) {
+					request.setAttribute("estCarteDisponible", true);
+					if(facade.getCompte(username).getArgent() >= Carte.prixPaquet) {
+						facade.ajouterArgentCompte(username, -Carte.prixPaquet);
+						request.setAttribute("cartesObtenues", facade.getPlusieursCartes(nbCartesPaquet,username));
+					}
+				}
+			}
+			
 			request.getRequestDispatcher("ouverturePaquetCartes.jsp").forward(request, response);
 		}
 		if(operation.equals("afficherPublication")) {
@@ -148,9 +162,19 @@ public class Serv extends HttpServlet {
 			String username = (String) request.getSession().getAttribute("usernameActif");
 			//request.setAttribute("cartePossedee", facade.getCarteCompte(c.getNom()));
 			//request.setAttribute("cartePossedee", facade.getCarteCompte(username));
-			request.setAttribute("cartePossedee", facade.getCompte(username).getCartes());
-			request.setAttribute("argents", facade.getCompte(username).getArgent());
+			if(username != null) {
+				request.setAttribute("cartePossedee", facade.getCompte(username).getCartes());
+				request.setAttribute("argents", facade.getCompte(username).getArgent());
+				
+			}
 			request.getRequestDispatcher("afficherPossession.jsp").forward(request, response);
+		}
+		if(operation.equals("upVote")) {
+			System.out.println("\n\n\n"+request.getParameter("cible")+ "\n\n\n");
+			String usernameActif = (String) request.getSession().getAttribute("usernameActif");
+			facade.upVotePublication(Integer.parseInt(request.getParameter("cible")), usernameActif);
+			//facade.upVotePublication(Integer.parseInt(request.getParameter("cible")));
+			request.getRequestDispatcher("index.html").forward(request, response);
 		}
 	}
 

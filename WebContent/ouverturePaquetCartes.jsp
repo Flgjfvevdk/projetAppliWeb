@@ -12,19 +12,23 @@
 </head>
 <body>
 
-<% //Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
-String usernameActif = (String) request.getSession().getAttribute("usernameActif");
-if(usernameActif != null){%>
-	<%Collection<Carte> listeCartesObtenues = (Collection<Carte>) request.getAttribute("cartesObtenues");
-	for(Carte c : listeCartesObtenues){ %>
-		<%=c.getNom() %>
-		<br>
-	<%}%>
-	
-<%}else {%>
-	Vous devez être connecté pour consulter vos possessions.
+<% if((boolean) request.getAttribute("estUserConnecte") && (boolean) request.getAttribute("estCarteDisponible")){
+	if((int)request.getAttribute("argentDispo") >= Carte.prixPaquet){%>
+		<%Collection<Carte> listeCartesObtenues = (Collection<Carte>) request.getAttribute("cartesObtenues");
+		for(Carte c : listeCartesObtenues){ %>
+			<%=c.getNom() %>
+			<br>
+		<%}%>
+		
+	<% }else {%>
+		Vous n'avez pas assez de tokens, un paquet coute <%=Carte.prixPaquet %> tokens.
+	<%} %>
 
-<%} %>
+<%} else if(! (boolean) request.getAttribute("estUserConnecte")){%>
+	Vous devez être connecté pour acheter un paquet.
+<%}else {%>
+	Aucune carte n'est disponible. Créez en une !
+<%}%>
 	
 	<br>
 	<A HREF=index.html> Retour au menu.

@@ -34,7 +34,7 @@ public class Compte {
 	public Compte(String nom, String mdp) {
 		this.nom = nom;
 		this.motDePasse = mdp;
-		this.argent = 0;
+		this.argent = 10;
 		this.cartes = new ArrayList<Carte>();
 		this.decks = new ArrayList<Deck>();
 	}
@@ -61,5 +61,9 @@ public class Compte {
 	
 	public List<Carte> getCartes(){
 		return this.cartes;
+	}
+	
+	public void addArgent(int m) {
+		this.argent += m;
 	}
 }
