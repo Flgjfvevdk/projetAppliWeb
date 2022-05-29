@@ -1,0 +1,106 @@
+@charset "UTF-8";
+body {
+background: #999999;
+font-family: Montserrat, "sans-serif";
+display: block;
+justify-content: center;
+color: #303030;
+}
+.creation h1 {
+	font-size: 28px;
+	font-weight: 900;
+}
+.creation form div {
+width: 100%;
+display: flex;
+flex-direction: column;
+min-height: 83px;
+margin-top: 25px;
+justify-content: space-between;
+}
+.creation form div > label {
+margin-bottom: 7px;
+font-weight: 600;
+display: block;
+}
+.creation form div > input {
+background: #FFD9D9;
+border: none;
+border-radius: 5px;
+font-size: 16px;
+font-weight: 500;
+font-family: Montserrat, "sans-serif";
+box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.25);
+}
+.creation form div > input {
+height: 50px;
+padding-left: 10px;
+}
+.creation form div > input::placeholder {
+color: white;
+}
+.creation form div:last-child {
+align-items:center;
+margin-top: 20px;
+}
+.creation form button {
+width: 450px;
+max-width: 500px;
+height: 60px;
+font-weight: 700;
+font-size: 28px;
+background: white;
+border: rgba(48, 48, 48, 0.5) solid 1px;
+border-radius: 5px;
+box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+color: #303030;
+}
+.connection h2 {
+	font-size: 28px;
+	font-weight: 900;
+}
+.connection form div {
+width: 100%;
+display: flex;
+flex-direction: column;
+min-height: 83px;
+margin-top: 25px;
+}
+.connection form div > label {
+margin-bottom: 7px;
+font-weight: 600;
+display: block;
+
+}
+.connection form div > input {
+background: #FFD9D9;
+border: none;
+border-radius: 5px;
+font-size: 16px;
+font-weight: 500;
+font-family: Montserrat, "sans-serif";
+box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.25);
+}
+.connection form div > input {
+height: 50px;
+padding-left: 10px;
+}
+.connection form div > input::placeholder {
+color: white;
+}
+.connection form div:last-child {
+align-items:center;
+margin-top: 20px;
+}
+.connection form button {
+width: 450px;
+max-width: 500px;
+height: 60px;
+font-weight: 700;
+font-size: 28px;
+background: white;
+border: rgba(48, 48, 48, 0.5) solid 1px;
+border-radius: 5px;
+box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+color: #303030;
+}
