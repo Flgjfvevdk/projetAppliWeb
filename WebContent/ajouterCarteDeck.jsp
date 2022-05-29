@@ -9,23 +9,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Afficher les decks</title>
+<title>Ajouter carte dans deck</title>
 </head>
 <body>
 <form method = "post" action = "Serv">
 	<% int first = 1;
-	Collection<Deck> listeDecks = (Collection<Deck>) request.getAttribute("liste_d");
-	for(Deck d : listeDecks){ 
-		int id = d.getId();%>
-		<input type = "radio" name = "deckId" value = "<%=id %>" <% if (first == 1) {%> checked <%}%>> 
-		<%=d.getNom() %>
+	Collection<Carte> listeCartesPossedees = (Collection<Carte>) request.getAttribute("liste_c");
+	for(Carte c : listeCartesPossedees){ 
+		int id = c.getId();%>
+		<input type = "radio" name = "carteId" value = "<%=id %>" <% if (first == 1) {%> checked <%}%>> 
+		<%=c.getNom() %>
 		<%first = 0; %><br>
 	<%} if(first==0){ %>
 	<br>
-	<input type = "hidden" value ="VoirDeck" name = "operation">
-	<input type = "submit" value = "Voir le deck">
+	<input type = "hidden" value ="ajouterLaCarte" name = "operation">
+	<input type = "submit" value = "Ajouter la carte">
 	<%} else {%>
-	Vous n'avez pas de deck.
+	Vous n'avez pas de cartes.
 	
 	<%} %>
 </form>

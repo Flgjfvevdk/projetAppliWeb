@@ -11,11 +11,21 @@ public class Deck {
 	int id;
 	String nom;
 	
-	@ManyToMany(mappedBy="decks",fetch = FetchType.EAGER);
+	@ManyToMany(fetch = FetchType.EAGER)
 	List<Carte> cartes;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	Compte proprietaire;
+	
+	public Deck() {
+	}
 	
 	public Deck(String nom) {
 		this.nom = nom;
+	}
+	public Deck(String nom, Compte c) {
+		this.nom = nom;
+		this.proprietaire = c;
 	}
 	public int getId() {
 		return id;
@@ -40,5 +50,15 @@ public class Deck {
 	}
 	public void SuprCarte(Carte c) {
 			cartes.remove(c);
+	}
+
+
+	public Compte getProprietaire() {
+		return proprietaire;
+	}
+
+
+	public void setProprietaire(Compte proprietaire) {
+		this.proprietaire = proprietaire;
 	}
 }

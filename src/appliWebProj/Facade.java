@@ -151,17 +151,16 @@ public class Facade {
 		}
 	}
 	public Collection<Deck> getListeDeck(String username){
-		String requete = "SELECT c FROM Compte c WHERE c.nom='"+username+"'";
-		TypedQuery<Compte> rq = em.createQuery(requete, Compte.class);
-		if(rq.getResultList().size() > 0) {
-			Compte c = rq.getResultList().get(0);
-			return c.decks;
-		}
+		String requete = "SELECT d FROM Deck d WHERE d.proprietaire.nom='"+username+"'";
+		TypedQuery<Deck> rq = em.createQuery(requete, Deck.class);
+		System.out.println("\n\n\n"+ rq.getResultList().size() + "\n\n");
+		return rq.getResultList();
 	}
 	
-	public void ajouterDeck(Compte cp, Deck d) {
-		cp.addDeck(d);
+	public void ajouterDeck(String username, String nom) {
+		Compte cp =  this.getCompte(username);
+		Deck d = new Deck(nom, cp);
 		em.persist(cp);
-		em.persost(d);
+		em.persist(d);
 	}
 }

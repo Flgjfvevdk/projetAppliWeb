@@ -18,7 +18,7 @@ public class Compte {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	List<Carte> cartes;
-	@OneToMany
+	@OneToMany(mappedBy="proprietaire")
 	List<Deck> decks;
 	
 	

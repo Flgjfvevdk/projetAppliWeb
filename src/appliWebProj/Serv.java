@@ -160,8 +160,6 @@ public class Serv extends HttpServlet {
 		if(operation.equals("afficherPossession")) {
 			//Compte c = (Compte) request.getSession().getAttribute("compteActif");
 			String username = (String) request.getSession().getAttribute("usernameActif");
-			//request.setAttribute("cartePossedee", facade.getCarteCompte(c.getNom()));
-			//request.setAttribute("cartePossedee", facade.getCarteCompte(username));
 			if(username != null) {
 				request.setAttribute("cartePossedee", facade.getCompte(username).getCartes());
 				request.setAttribute("argents", facade.getCompte(username).getArgent());
@@ -193,16 +191,15 @@ public class Serv extends HttpServlet {
 		}
 		if (operation.equals("afficherDecks")){
 			System.out.println("\n\n On veut afficher les decks \n\n");
-			//System.out.println(facade.getListeCartes());
 			request.setAttribute("liste_d", facade.getListeDeck((String) request.getSession().getAttribute("usernameActif")));
-			request.getRequestDispatcher("afficherDecks.jsp").forward(request, response);
+			request.getRequestDispatcher("afficherDeck.jsp").forward(request, response);
 		}
 		if (operation.equals("VoirDeck")){
 			System.out.println("\n\n On veut voir un deck \n\n");
 			//System.out.println(facade.getListeCartes());
 			Collection<Deck> ds =facade.getListeDeck((String) request.getSession().getAttribute("usernameActif"));
-			Deck AVoir;
-			int IdATrouver = request.getParameter("deckId");
+			Deck AVoir = null;
+			int IdATrouver = Integer.parseInt(request.getParameter("deckId"));
 			for (Deck d:ds) {
 				if (d.getId()==IdATrouver) {
 					AVoir = d;
@@ -212,20 +209,31 @@ public class Serv extends HttpServlet {
 			request.getRequestDispatcher("VoirDeck.jsp").forward(request, response);
 		}
 		if (operation.equals("creationDeck")){
-			System.out.println("\n\n On veut créer un deck \n\n");
+			System.out.println("\n\n On vas dans l'onglet creationDeck \n\n");
 			//System.out.println(facade.getListeCartes());
 			request.getRequestDispatcher("creationDeck.jsp").forward(request, response);
 		}
 		if (operation.equals("creerDeck")){
 			System.out.println("\n\n On veut créer un deck \n\n");
-			//System.out.println(facade.getListeCartes());
 			String username = (String) request.getSession().getAttribute("usernameActif");
 			String nom = (String) request.getParameter("nomDeck");
-			Deck nv_Deck = new Deck(nom);
-			Compte cp =  facade.getCompte(username);
-			facade.ajouterDeck(cp,nv_Deck);
+			facade.ajouterDeck(username,nom);
 			
+			request.getRequestDispatcher("index.html").forward(request, response);
+		}
+		if (operation.equals("ajouterADeck")){
+			System.out.println("\n\n On veut ajouter des cartes dans un deck \n\n");
+			String username = (String) request.getSession().getAttribute("usernameActif");
+			request.setAttribute("liste_c", facade.getCompte(username).getCartes());
+			request.getRequestDispatcher("ajouterCarteDeck.jsp").forward(request, response);
+		}
+		if(operation.equals("ajouterLaCarte")){
+			System.out.println("\n\n On veut ajouter la carte dans un deck \n\n");
+			int idCarte = Integer.parseInt(request.getParameter("carteId"));
 			
+			String username = (String) request.getSession().getAttribute("usernameActif");
+			request.setAttribute("liste_c", facade.getCompte(username).getCartes());
+			request.getRequestDispatcher("ajouterCarteDeck.jsp").forward(request, response);
 		}
 	}
 
