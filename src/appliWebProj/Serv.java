@@ -115,7 +115,6 @@ public class Serv extends HttpServlet {
 		}
 		if(operation.equals("afficherPublication")) {
 			request.setAttribute("listePublicat", facade.getPublications());
-			System.out.println("\n\neuh\n\n");
 			request.getRequestDispatcher("afficherListePublication.jsp").forward(request, response);
 		}
 		if(operation.equals("authentification")) {
@@ -233,18 +232,33 @@ public class Serv extends HttpServlet {
 			System.out.println("\n\n On veut ajouter la carte dans un deck \n\n");
 			int idCarte = Integer.parseInt(request.getParameter("carteId"));
 			int idDeck = (int) request.getSession().getAttribute("idDeckActif");
-			//String username = (String) request.getSession().getAttribute("usernameActif");
-			System.out.println("\n\n yes \n\n");
 			facade.ajouterCarteADeck(idCarte, idDeck);
-			System.out.println("\n\n non \n\n");
 			request.getRequestDispatcher("index.html").forward(request, response);
 		}
 		if(operation.equals("afficherTopic")) {
-			request.setAttribute("listeTopic", facade.getTopic());
+			request.setAttribute("listeTopic", facade.getAllTopics());
 			request.getRequestDispatcher("listeTopic.jsp").forward(request, response);
 		}
+		if(operation.equals("ajouterUnTopic")) {
+			String titre = request.getParameter("titre");
+			String usernameActif = (String) request.getSession().getAttribute("usernameActif");
+			facade.creerTopic(titre, usernameActif);
+			request.getRequestDispatcher("index.html").forward(request, response);
+		}
 		if(operation.equals("entrerDansTopic")) {
-			
+			int idTopic = Integer.parseInt(request.getParameter("cible"));
+			Topic top = facade.getTopic(idTopic);
+			Collection<Message> messages = facade.getListeMessagesTopic(idTopic);
+			request.setAttribute("topic", top);
+			request.setAttribute("listeMess", messages);
+			request.getRequestDispatcher("topicListeMessage.jsp").forward(request, response);
+		}
+		if(operation.equals("commenterTopic")) {
+			int idTopic = Integer.parseInt(request.getParameter("cible"));
+			String commentaireTxt = request.getParameter("commentaire");
+			String usernameActif = (String) request.getSession().getAttribute("usernameActif");
+			facade.ajouterCommentaireTopic(idTopic,usernameActif, commentaireTxt);
+			request.getRequestDispatcher("index.html").forward(request, response);
 		}
 		
 	}

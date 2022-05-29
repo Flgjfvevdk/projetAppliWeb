@@ -165,8 +165,37 @@ public class Facade {
 		em.persist(d);
 		em.persist(carte);
 	}
-	public Collection<Topic> getTopic(){
+	public void creerTopic(String titre, String usernameCreateur) {
+		Compte createur = getCompte(usernameCreateur);
+		Topic t = new Topic(titre, createur);
+		em.persist(t);
+		em.persist(createur);
+	}
+	
+	public Collection<Topic> getAllTopics(){
 		TypedQuery<Topic> req = em.createQuery("select t from Topic t",Topic.class);
+		return req.getResultList();
+	}
+	public Topic getTopic(int idTopic){
+		String requete = "SELECT t FROM Topic t WHERE t.id='"+idTopic+"'";
+		TypedQuery<Topic> req = em.createQuery(requete,Topic.class);
+		if(req.getResultList().size() > 0) {
+			return ((ArrayList<Topic>) req.getResultList()).get(0);
+		}
+		return null;
+	}
+	public void ajouterCommentaireTopic(int idTopic, String usernameCommentateur, String commentaire) {
+		String requete = "SELECT t FROM Topic t WHERE t.id='"+idTopic+"'";
+		TypedQuery<Topic> req = em.createQuery(requete,Topic.class);
+		if(req.getResultList().size() > 0) {
+			Topic topic = ((ArrayList<Topic>) req.getResultList()).get(0);
+			Message m = new Message(commentaire, getCompte(usernameCommentateur), topic);
+			em.persist(m);
+		}
+	}
+	public Collection<Message> getListeMessagesTopic(int idTopic){
+		String requete = "SELECT m FROM Message m WHERE m.topic.id='"+idTopic+"'";
+		TypedQuery<Message> req = em.createQuery(requete,Message.class);
 		return req.getResultList();
 	}
 }

@@ -14,9 +14,14 @@
 </head>
 <body>
 <script id="replace_with_navbar" src="navbar.js"></script>
+<form>
+Creez un nouveau topic : <input type="text" name="titre">
+<input type="submit" name="operation" value="ajouterUnTopic">
+</form>
+
 	<%
 	Collection<Topic> listeTopic = (Collection<Topic>) request.getAttribute("listeTopic");
-		
+	
 	for(Topic t : listeTopic){ %>
 	<form action="Serv" method ="post">
 		<%=t.getTitre() %>
