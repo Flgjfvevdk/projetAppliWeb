@@ -17,11 +17,13 @@
 <% //Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
 String usernameActif = (String) request.getSession().getAttribute("usernameActif");
 if(usernameActif != null){%>
+<div class="dejaCo"> 
 	Vous êtes déjà connecté en tant que : <%=usernameActif %>
 	<form action="Serv" method ="post">
-	<input type="submit" name="operation" value="seDeconnecter">
+	<button type="submit" name="operation" value="seDeconnecter">Se déconnecter</button>
 	</form>
-<%}else {%>
+</div>
+<% } else { %>
 
 
 
@@ -34,7 +36,7 @@ if(usernameActif != null){%>
 		</div>
 		<div>
 		<label for="mdp">Mot de passe</label>
-		<input type="text" id="mdp" name="mdp" placeholder="azerty123" required> <br>
+		<input type="password" id="mdp" name="mdp" placeholder="azerty123" required> <br>
 		</div>
 		<div>
 		<button type="submit" name="operation" value="creerCompte">Créer le compte</button>
@@ -51,7 +53,7 @@ if(usernameActif != null){%>
 		</div>
 		<div>
 		<label for="mdp">Mot de passe</label>
-		<input type="text" id="mdp" name="mdp" placeholder="azerty123" required> <br>
+		<input type="password" id="mdp" name="mdp" placeholder="azerty123" required> <br>
 		</div>
 		<div>
 		<button type="submit" name="operation" value="seConnecter">Se connecter</button>

@@ -17,11 +17,20 @@
 <% //Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
 String usernameActif = (String) request.getSession().getAttribute("usernameActif");
 if(usernameActif != null){%>
+<div class="creation">
+	<h1>Créez votre carte !</h1>
 	<form action="Serv" method ="post" enctype="multipart/form-data">
-	nom : <input type="text" name="nomCarte"> <br>
-	image : <input type="file" name="imageCarte"> <br>
-	<input type="submit" name="operation" value="creerCarte">
-</form>
+		<div>
+		<label for="nom">Nom de la carte</label>
+		<input type="text" id="nom" name="nomCarte" placeholder="8 de pic" required> <br>
+		</div>
+		<div>
+		<label for="image">Importez l'image de la carte</label>
+		<input type="file" id="image" name="imageCarte" required> <br>
+		</div>
+		<button type="submit" name="operation" value="creerCarte">Soumettre la carte</button>
+	</form>
+</div>
 <%}else {%>
 	Vous devez être connecté pour créer une carte.
 	<script src="alerteConnection.js"></script>
