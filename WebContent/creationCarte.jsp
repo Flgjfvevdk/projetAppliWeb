@@ -13,7 +13,9 @@
 <link rel="stylesheet" href="creationCarte.css">
 </head>
 <body>
-<script id="replace_with_navbar" src="navbar.js"></script>
+<div class="nav">
+	<script id="replace_with_navbar" src="navbar.js"></script>
+</div>
 <% //Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
 String usernameActif = (String) request.getSession().getAttribute("usernameActif");
 if(usernameActif != null){%>
