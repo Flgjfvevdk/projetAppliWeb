@@ -8,7 +8,6 @@ color: #303030;
 }
 .nav {
 	position: relative;
-	height: 300px;
 }
 .dejaCo {
 	font-size: 28px;
@@ -44,7 +43,7 @@ justify-content: space-between;
 .creation form div > label {
 margin-bottom: 7px;
 font-weight: 600;
-display: block;
+display: contents;
 }
 .creation form div > input {
 background: #FFD9D9;
@@ -92,7 +91,7 @@ margin-top: 25px;
 .connection form div > label {
 margin-bottom: 7px;
 font-weight: 600;
-display: block;
+display: contents;
 
 }
 .connection form div > input {

@@ -16,9 +16,11 @@
 <div class="nav">
 	<script id="replace_with_navbar" src="navbar.js"></script>
 </div>
+
+
 <% //Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
 String usernameActif = (String) request.getSession().getAttribute("usernameActif");
-if(usernameActif != null){%>
+if(usernameActif != null){ %>
 <div class="creation">
 	<h1>Créez votre carte !</h1>
 	<form action="Serv" method ="post" enctype="multipart/form-data">
