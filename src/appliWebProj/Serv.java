@@ -239,6 +239,13 @@ public class Serv extends HttpServlet {
 			System.out.println("\n\n non \n\n");
 			request.getRequestDispatcher("index.html").forward(request, response);
 		}
+		if(operation.equals("afficherTopic")) {
+			request.setAttribute("listeTopic", facade.getTopic());
+			request.getRequestDispatcher("listeTopic.jsp").forward(request, response);
+		}
+		if(operation.equals("entrerDansTopic")) {
+			
+		}
 		
 	}
 

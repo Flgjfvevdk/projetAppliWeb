@@ -164,6 +164,9 @@ public class Facade {
 		d.AddCarte(carte);
 		em.persist(d);
 		em.persist(carte);
-		
+	}
+	public Collection<Topic> getTopic(){
+		TypedQuery<Topic> req = em.createQuery("select t from Topic t",Topic.class);
+		return req.getResultList();
 	}
 }

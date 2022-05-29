@@ -24,9 +24,8 @@
 		<%=t.getNomCreateur() %> 
 		<br>
 		<input type="hidden" name="cible" value=<%=t.getId()%>>
-		<input type="submit" name="operation" value="afficherDetailsPublication">
-		<%String usernameActif = (String) request.getSession().getAttribute("usernameActif");%>
-		
+		<input type="submit" name="operation" value="entrerDansTopic">
+
 	</form>
 		<br><br>
 	<%}%>
