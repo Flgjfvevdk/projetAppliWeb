@@ -19,7 +19,8 @@
 		
 	for(Publication p : listePublications){ %>
 	<form action="Serv" method ="post">
-		<%=p.getCarte().getNom() %> 
+		<%=p.getCarte().getNom() %> <br>
+		<img src=<%= p.getCarte().getImage() %> /> 
 		<br>
 		votes positifs : <%=p.getVotes() %> 
 		<br>

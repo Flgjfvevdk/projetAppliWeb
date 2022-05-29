@@ -6,3 +6,9 @@ body {
 	justify-content: center;
 	color: #303030;
 }
+
+img {
+ 	width: 150px;
+ 	height: 200px;
+	object-fit: cover;
+}

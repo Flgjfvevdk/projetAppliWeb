@@ -17,6 +17,7 @@
 <%Publication publication = (Publication) request.getAttribute("publication");
 %>
 Publication de la carte : <%=publication.getNomCarte() %>
+<br> <form><img src=<%= publication.getCarte().getImage() %> /> </form>
 <br> Par : <%=publication.getNomCreateur() %>
 <br> Nombre de upvote : <%=publication.getVotes() %>
 <br>
