@@ -24,6 +24,14 @@ public class Facade {
 		
 	}
 	
+	public void creerDeck(String nom, String usernameCreateur) {
+		String requete = "SELECT c FROM Compte c WHERE c.nom='"+usernameCreateur+"'";
+		TypedQuery<Compte> rq = em.createQuery(requete, Compte.class);
+		Compte createur = rq.getResultList().get(0);
+		Deck d = new Deck(nom);
+		em.persist(d);		
+	}
+	
 	public Compte creerCompte(String username, String mdp){
 		
 		String requete = "SELECT c FROM Compte c WHERE c.nom='"+username+"'";
@@ -51,6 +59,10 @@ public class Facade {
 		return req.getResultList();
 	}
 	
+	public Carte getCarte(int id) {
+		ArrayList<Carte> listeCartes = new ArrayList<Carte>(getListeCartes());
+		return listeCartes.get(id);
+	}
 	public Carte getRandomCarte() {
 		ArrayList<Carte> listeCartes = new ArrayList<Carte>(getListeCartes());
 		Random rand = new Random();
@@ -137,5 +149,19 @@ public class Facade {
 			Message m = new Message(commentaire, getCompte(usernameCommentateur), publication);
 			em.persist(m);
 		}
+	}
+	public Collection<Deck> getListeDeck(String username){
+		String requete = "SELECT c FROM Compte c WHERE c.nom='"+username+"'";
+		TypedQuery<Compte> rq = em.createQuery(requete, Compte.class);
+		if(rq.getResultList().size() > 0) {
+			Compte c = rq.getResultList().get(0);
+			return c.decks;
+		}
+	}
+	
+	public void ajouterDeck(Compte cp, Deck d) {
+		cp.addDeck(d);
+		em.persist(cp);
+		em.persost(d);
 	}
 }
