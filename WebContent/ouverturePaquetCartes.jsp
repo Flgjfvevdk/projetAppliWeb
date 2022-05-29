@@ -28,6 +28,7 @@
 
 <%} else if(! (boolean) request.getAttribute("estUserConnecte")){%>
 	Vous devez être connecté pour acheter un paquet.
+	<script src="alerteConnection.js"></script>
 <%}else {%>
 	Aucune carte n'est disponible. Créez en une !
 <%}%>

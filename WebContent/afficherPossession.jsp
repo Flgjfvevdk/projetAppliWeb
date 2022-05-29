@@ -30,8 +30,9 @@ if(usernameActif != null){%>
 	<%}%>
 	
 <%}else {%>
+	
 	Vous devez être connecté pour consulter vos possessions.
-
+	<script src="alerteConnection.js"></script>
 <%} %>
 
 <br>

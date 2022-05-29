@@ -24,6 +24,7 @@ if(usernameActif != null){%>
 </form>
 <%}else {%>
 	Vous devez être connecté pour créer une carte.
+	<script src="alerteConnection.js"></script>
 
 <%} %>
 
