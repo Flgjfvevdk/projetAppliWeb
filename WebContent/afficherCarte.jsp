@@ -13,6 +13,7 @@
 <title>Afficher les cartes</title>
 </head>
 <body>
+<script id="replace_with_navbar" src="navbar.js"></script>
 	<%Collection<Carte> listeCartes = (Collection<Carte>) request.getAttribute("liste_c");
 	for(Carte c : listeCartes){ %>
 		<%=c.getNom() %><br>

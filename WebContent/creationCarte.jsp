@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script id="replace_with_navbar" src="navbar.js"></script>
 <% //Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
 String usernameActif = (String) request.getSession().getAttribute("usernameActif");
 if(usernameActif != null){%>

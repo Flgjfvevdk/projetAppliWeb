@@ -11,6 +11,7 @@
 <title>Afficher publications</title>
 </head>
 <body>
+<script id="replace_with_navbar" src="navbar.js"></script>
 	<%Collection<Publication> listePublications = (Collection<Publication>) request.getAttribute("listePublicat");
 	for(Publication p : listePublications){ %>
 	<form action="Serv" method ="post">

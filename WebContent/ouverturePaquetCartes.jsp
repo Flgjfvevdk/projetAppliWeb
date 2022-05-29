@@ -11,7 +11,7 @@
 <title>Ouverture paquet</title>
 </head>
 <body>
-
+<script id="replace_with_navbar" src="navbar.js"></script>
 <% if((boolean) request.getAttribute("estUserConnecte") && (boolean) request.getAttribute("estCarteDisponible")){
 	if((int)request.getAttribute("argentDispo") >= Carte.prixPaquet){%>
 		<%Collection<Carte> listeCartesObtenues = (Collection<Carte>) request.getAttribute("cartesObtenues");
