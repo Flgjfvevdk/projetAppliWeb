@@ -7,6 +7,9 @@ body {
 	color: #303030;
 	
 }
+.nav {
+	position: relative;
+}
 .creation {
 	font-size: 28px;
 	font-weight: 900;

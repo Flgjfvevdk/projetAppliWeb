@@ -6,6 +6,10 @@ display: block;
 justify-content: center;
 color: #303030;
 }
+.nav {
+	position: relative;
+	height: 300px;
+}
 .dejaCo {
 	font-size: 28px;
 	font-weight: 900;
