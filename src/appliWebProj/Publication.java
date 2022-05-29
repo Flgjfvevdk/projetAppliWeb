@@ -19,7 +19,11 @@ public class Publication {
 	@ManyToOne
 	Compte proprietaire;
 	
+	@OneToMany(mappedBy="publication")
+	List<Message> messages;
+	
 	ArrayList<String> usernameComptesUpvote;
+	
 	
 	int votes;
 	
@@ -30,6 +34,7 @@ public class Publication {
 		this.carte = c;
 		this.proprietaire = p;
 		usernameComptesUpvote = new ArrayList<String>();
+		this.messages = new ArrayList<Message>();
 	}
 	
 	public int getId() {
@@ -64,6 +69,13 @@ public class Publication {
 	
 	public String getNomCreateur() {
 		return this.proprietaire.getNom();
+	}
+	
+	public void ajouterMessage(Message mess) {
+		this.messages.add(mess);
+	}
+	public List<Message> getMessages() {
+		return this.messages;
 	}
 	
 	

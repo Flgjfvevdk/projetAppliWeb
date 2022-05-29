@@ -25,7 +25,7 @@ public class Compte {
 	@OneToMany(mappedBy = "proprietaire")
 	List<Publication> publications;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "proprietaire")
 	List<Message> messages;
 	
 	public Compte() {

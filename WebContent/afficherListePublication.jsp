@@ -21,11 +21,12 @@
 		<br>
 		Créée par : <%=p.getNomCreateur() %>
 		<br>
+		<input type="hidden" name="cible" value=<%=p.getId()%>>
+		<input type="submit" name="operation" value="afficherDetailsPublication">
 		<%String usernameActif = (String) request.getSession().getAttribute("usernameActif");
 		if(usernameActif != null && !p.userAlreadyUpvote(usernameActif)){
 			%>
 		
-		<input type="hidden" name="cible" value=<%=p.getId()%>>
 		<input type="submit" name="operation" value="upVote">
 		<%} %>
 	</form>

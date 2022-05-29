@@ -89,7 +89,6 @@ public class Facade {
 	
 	public void upVotePublication(int id, String usernameUpvoter) {
 		TypedQuery<Publication> req = em.createQuery("select p from Publication p WHERE p.id='"+id+"'",Publication.class);
-		System.out.println("\n\n" + req.getResultList().size() + "\n\n");
 		ArrayList<Publication> resultat = (ArrayList<Publication>)req.getResultList();
 		if(resultat.size() > 0) {
 			resultat.get(0).incrementVotes(usernameUpvoter);
@@ -114,6 +113,29 @@ public class Facade {
 			Compte c = rq.getResultList().get(0);
 			c.addArgent(valeur);
 			em.persist(c);
+		}
+	}
+	
+	public Collection<Message> getListeMessages(int idPublication){
+		String requete = "SELECT m FROM Message m WHERE m.publication.id='"+idPublication+"'";
+		TypedQuery<Message> req = em.createQuery(requete,Message.class);
+		return req.getResultList();
+	}
+	public Publication getPublication(int idPublication){
+		String requete = "SELECT p FROM Publication p WHERE p.id='"+idPublication+"'";
+		TypedQuery<Publication> req = em.createQuery(requete,Publication.class);
+		if(req.getResultList().size() > 0) {
+			return ((ArrayList<Publication>) req.getResultList()).get(0);
+		}
+		return null;
+	}
+	public void ajouterCommentairePublication(int idPublication, String usernameCommentateur, String commentaire) {
+		String requete = "SELECT p FROM Publication p WHERE p.id='"+idPublication+"'";
+		TypedQuery<Publication> req = em.createQuery(requete,Publication.class);
+		if(req.getResultList().size() > 0) {
+			Publication publication = ((ArrayList<Publication>) req.getResultList()).get(0);
+			Message m = new Message(commentaire, getCompte(usernameCommentateur), publication);
+			em.persist(m);
 		}
 	}
 }

@@ -170,10 +170,26 @@ public class Serv extends HttpServlet {
 			request.getRequestDispatcher("afficherPossession.jsp").forward(request, response);
 		}
 		if(operation.equals("upVote")) {
-			System.out.println("\n\n\n"+request.getParameter("cible")+ "\n\n\n");
 			String usernameActif = (String) request.getSession().getAttribute("usernameActif");
 			facade.upVotePublication(Integer.parseInt(request.getParameter("cible")), usernameActif);
 			//facade.upVotePublication(Integer.parseInt(request.getParameter("cible")));
+			request.getRequestDispatcher("index.html").forward(request, response);
+		}
+		if(operation.equals("afficherDetailsPublication")) {
+			int idPublication = Integer.parseInt(request.getParameter("cible"));
+			//Collection<Message> messages = facade.getListeMessages(idPublication);
+			Publication publi = facade.getPublication(idPublication);
+			Collection<Message> messages = facade.getListeMessages(idPublication);
+			request.setAttribute("publication", publi);
+			request.setAttribute("listeMess", messages);
+			request.getRequestDispatcher("publicationEtMessages.jsp").forward(request, response);
+		}
+		if(operation.equals("commenterPublication")) {
+			System.out.println("\n\n\n on est la\n\n");
+			int idPublication = Integer.parseInt(request.getParameter("cible"));
+			String commentaireTxt = request.getParameter("commentaire");
+			String usernameActif = (String) request.getSession().getAttribute("usernameActif");
+			facade.ajouterCommentairePublication(idPublication,usernameActif, commentaireTxt);
 			request.getRequestDispatcher("index.html").forward(request, response);
 		}
 	}
