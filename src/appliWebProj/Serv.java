@@ -177,7 +177,6 @@ public class Serv extends HttpServlet {
 		}
 		if(operation.equals("afficherDetailsPublication")) {
 			int idPublication = Integer.parseInt(request.getParameter("cible"));
-			//Collection<Message> messages = facade.getListeMessages(idPublication);
 			Publication publi = facade.getPublication(idPublication);
 			Collection<Message> messages = facade.getListeMessages(idPublication);
 			request.setAttribute("publication", publi);
