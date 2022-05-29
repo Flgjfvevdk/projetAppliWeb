@@ -11,6 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Afficher les cartes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="afficherCarte.css">
 </head>
 <body>
 <script id="replace_with_navbar" src="navbar.js" ></script>

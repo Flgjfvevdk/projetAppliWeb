@@ -9,6 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Publication et messages</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="publicationEtMessages.css">
 </head>
 <body>
 <%Publication publication = (Publication) request.getAttribute("publication");
