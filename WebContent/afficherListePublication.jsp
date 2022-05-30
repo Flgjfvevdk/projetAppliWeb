@@ -13,7 +13,11 @@
 <link rel="stylesheet" href="afficherListePublication.css">
 </head>
 <body>
+<div class="nav">
 <script id="replace_with_navbar" src="navbar.js"></script>
+</div>
+<div class="publi">
+<h1>Publications</h1>
 	<%
 	Collection<Publication> listePublications = (Collection<Publication>) request.getAttribute("listePublicat");
 		
@@ -27,16 +31,17 @@
 		Créée par : <%=p.getNomCreateur() %>
 		<br>
 		<input type="hidden" name="cible" value=<%=p.getId()%>>
-		<input type="submit" name="operation" value="afficherDetailsPublication">
+		<button type="submit" name="operation" value="afficherDetailsPublication">Détails publications</button>
 		<%String usernameActif = (String) request.getSession().getAttribute("usernameActif");
 		if(usernameActif != null && !p.userAlreadyUpvote(usernameActif)){
 			%>
 		
-		<input type="submit" name="operation" value="upVote">
+		<button type="submit" name="operation" value="upVote">Up voter</button>
 		<%} %>
 	</form>
 		<br><br>
 	<%}%>
+</div>
 	<br>
 	<A HREF=index.html> Retour au menu.
 	</A>

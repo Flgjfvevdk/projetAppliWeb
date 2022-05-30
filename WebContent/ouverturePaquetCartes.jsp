@@ -14,18 +14,23 @@
 </head>
 <body>
 <script id="replace_with_navbar" src="navbar.js"></script>
+<div class"tirage">
 <% if((boolean) request.getAttribute("estUserConnecte") && (boolean) request.getAttribute("estCarteDisponible")){
 	if((int)request.getAttribute("argentDispo") >= Carte.prixPaquet){%>
+	<h1>Tirage</h1>
 		<%Collection<Carte> listeCartesObtenues = (Collection<Carte>) request.getAttribute("cartesObtenues");
+		
 		for(Carte c : listeCartesObtenues){ %>
+		
 			<%=c.getNom() %>
 			<br>
+			<img src=<%= c.getImage() %> /> <br>
 		<%}%>
 		
 	<% }else {%>
 		Vous n'avez pas assez de tokens, un paquet coute <%=Carte.prixPaquet %> tokens.
 	<%} %>
-
+</div>
 <%} else if(! (boolean) request.getAttribute("estUserConnecte")){%>
 	Vous devez être connecté pour acheter un paquet.
 	<script src="alerteConnection.js"></script>

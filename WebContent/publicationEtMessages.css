@@ -5,10 +5,69 @@ body {
 	display: block;
 	justify-content: center;
 	color: #303030;
+	text-align: center;
 }
-
+.nav {
+	position: relative;
+}
 img {
  	width: 150px;
  	height: 200px;
 	object-fit: cover;
+}
+.publi {
+	font-size: 28px;
+	font-weight: 900;
+	margin: auto;
+  	width: 50%;
+  	text-align: center;
+}
+.publi h1 {
+	font-size: 28px;
+	font-weight: 900;
+}
+.publi form div {
+width: 100%;
+display: flex;
+flex-direction: column;
+min-height: 83px;
+margin-top: 25px;
+justify-content: space-between;
+}
+.publi form div > label {
+margin-bottom: 7px;
+font-weight: 600;
+display: contents;
+}
+.publi form div > input {
+background: #FFD9D9;
+border: none;
+border-radius: 5px;
+font-size: 16px;
+font-weight: 500;
+font-family: Montserrat, "sans-serif";
+box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.25);
+}
+.publi form div > input {
+height: 50px;
+padding-left: 10px;
+}
+.publi form div > input::placeholder {
+color: white;
+}
+.publi form div:last-child {
+align-items:center;
+margin-top: 20px;
+}
+.publi form button {
+width: 450px;
+max-width: 500px;
+height: 60px;
+font-weight: 700;
+font-size: 28px;
+background: white;
+border: rgba(48, 48, 48, 0.5) solid 1px;
+border-radius: 5px;
+box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+color: #303030;
 }

@@ -13,9 +13,13 @@
 <link rel="stylesheet" href="publicationEtMessages.css">
 </head>
 <body>
+<div class="nav">
 <script id="replace_with_navbar" src="navbar.js" ></script>
+</div>
 <%Publication publication = (Publication) request.getAttribute("publication");
 %>
+<div class="publi">
+<h1>Publications et messages</h1>
 Publication de la carte : <%=publication.getNomCarte() %>
 <br> <form><img src=<%= publication.getCarte().getImage() %> /> </form>
 <br> Par : <%=publication.getNomCreateur() %>
@@ -40,11 +44,15 @@ Publication de la carte : <%=publication.getNomCarte() %>
 	<%String usernameActif = (String) request.getSession().getAttribute("usernameActif");
 	if(usernameActif != null){ %>
 		<form action="Serv" method ="post">
+			<div>
 			<input type="hidden" name="cible" value=<%=publication.getId()%>>
-			<input type="text" name="commentaire"> <br>
-			<input type="submit" name="operation" value="commenterPublication">
+			<label for="com">Commentaire</label>
+			<input type="text" id="com" name="commentaire" placeholder="Trop bien" required> <br>
+			</div>
+			<button type="submit" name="operation" value="commenterPublication">Soumettre le commentaire</button>
 		</form>
 	<%} %>
+</div>
 	<br>
 	<A HREF=index.html> Retour au menu.
 	</A>

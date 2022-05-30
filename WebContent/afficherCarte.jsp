@@ -16,12 +16,15 @@
 </head>
 <body>
 <script id="replace_with_navbar" src="navbar.js" ></script>
+<div class="listeCartes">
+<h1>Liste des cartes</h1>
 	<%Collection<Carte> listeCartes = (Collection<Carte>) request.getAttribute("liste_c");
 	for(Carte c : listeCartes){ %>
 		<%=c.getNom() %><br>
 		<img src=<%= c.getImage() %> /> <br>
     		
 	<%}%>
+</div>
 	<br>
 	<A HREF=index.html> Retour au menu.
 	</A>

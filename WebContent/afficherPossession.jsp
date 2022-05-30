@@ -14,7 +14,11 @@
 <link rel="stylesheet" href="afficherPossession.css">
 </head>
 <body>
+<div class="nav">
 <script id="replace_with_navbar" src="navbar.js"></script>
+</div>
+<div class="poss">
+<h1>Mes possessions</h1>
 <% //Compte compteActif = (Compte) request.getSession().getAttribute("compteActif");
 String usernameActif = (String) request.getSession().getAttribute("usernameActif");
 if(usernameActif != null){%>
@@ -26,6 +30,7 @@ if(usernameActif != null){%>
 	//Collection<Carte> cartesPossedees = ((Compte) request.getSession().getAttribute("compteActif")).getCartes();
 	for(Carte c : cartesPossedees){ %>
 		<%=c.getNom()%>
+		<img src=<%= c.getImage() %> /> 
 		<br>
 	<%}%>
 	
@@ -34,7 +39,7 @@ if(usernameActif != null){%>
 	Vous devez être connecté pour consulter vos possessions.
 	<script src="alerteConnection.js"></script>
 <%} %>
-
+</div>
 <br>
 <A HREF=index.html> Retour au menu.
 </A>
