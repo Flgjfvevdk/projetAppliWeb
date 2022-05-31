@@ -10,9 +10,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Ajouter carte dans deck</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="ajouterCarteDeck.css">
 </head>
 <body>
 <script id="replace_with_navbar" src="navbar.js" ></script>
+<div class="ajouterCarteDeck">
 <form method = "post" action = "Serv">
 	<% int first = 1;
 	Collection<Carte> listeCartesPossedees = (Collection<Carte>) request.getAttribute("liste_c");
@@ -30,6 +34,8 @@
 	
 	<%} %>
 </form>
+</div>
+<br>
 <A HREF=index.html> Retour au menu.
 </A>
 

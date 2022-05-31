@@ -19,13 +19,18 @@
 <%Publication publication = (Publication) request.getAttribute("publication");
 %>
 <div class="publi">
-<h1>Publications et messages</h1>
-Publication de la carte : <%=publication.getNomCarte() %>
+Publicateur : <%=publication.getNomCarte() %>
 <br> <form><img src=<%= publication.getCarte().getImage() %> /> </form>
+</div>
+<div class="commentaire">
 <br> Par : <%=publication.getNomCreateur() %>
 <br> Nombre de upvote : <%=publication.getVotes() %>
 <br>
-<br>
+
+_________________
+<br></div>
+<div class="publi">Commentaires<br></div>
+<div class="commentaire">
 	<%
 	Collection<Message> listMessages = (Collection<Message>) request.getAttribute("listeMess");
 	if(listMessages != null){
@@ -38,7 +43,10 @@ Publication de la carte : <%=publication.getNomCarte() %>
 		<br>
 		écrit par : <%=m.getCreateur().getNom() %>
 		<br>
-	<%}}else {%>
+	<%}%>
+	_________________
+	<br>
+	<% }else {%>
 		Aucun message
 	<% } %>
 	<%String usernameActif = (String) request.getSession().getAttribute("usernameActif");
@@ -53,8 +61,8 @@ Publication de la carte : <%=publication.getNomCarte() %>
 		</form>
 	<%} %>
 </div>
-	<br>
-	<A HREF=index.html> Retour au menu.
-	</A>
+<br>
+<A HREF=index.html> Retour au menu.
+</A>
 </body>
 </html>

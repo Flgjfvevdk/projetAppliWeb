@@ -14,11 +14,18 @@
 </head>
 <body>
 <script id="replace_with_navbar" src="navbar.js"></script>
+<div class="ajoutTopic">
+<%if(request.getSession().getAttribute("usernameActif") != null){ %>
 <form>
 Creez un nouveau topic : <input type="text" name="titre">
-<input type="submit" name="operation" value="ajouterUnTopic">
+<button type="submit" name="operation" value="ajouterUnTopic">Ajouter un topic</button>
 </form>
-
+<%} else {%>
+	Vous devez être connecté pour créer un topic.
+<%} %>
+</div>
+<br>
+<div class="publi">
 	<%
 	Collection<Topic> listeTopic = (Collection<Topic>) request.getAttribute("listeTopic");
 	
@@ -26,16 +33,18 @@ Creez un nouveau topic : <input type="text" name="titre">
 	<form action="Serv" method ="post">
 		<%=t.getTitre() %>
 		<br>
-		<%=t.getNomCreateur() %> 
+		Créé par : <%=t.getNomCreateur() %> 
 		<br>
 		<input type="hidden" name="cible" value=<%=t.getId()%>>
-		<input type="submit" name="operation" value="entrerDansTopic">
+		<button type="submit" name="operation" value="entrerDansTopic">Entrer dans le topic</button>
 
 	</form>
 		<br><br>
 	<%}%>
-	<br>
-	<A HREF=index.html> Retour au menu.
-	</A>
+</div>
+<br>
+<A HREF=index.html> Retour au menu.
+</A>
+
 </body>
 </html>

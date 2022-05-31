@@ -14,12 +14,18 @@
 </head>
 <body>
 <script id="replace_with_navbar" src="navbar.js" ></script>
+<div class="publi">
 <%Topic topic = (Topic) request.getAttribute("topic");
 %>
 <h1><%=topic.getTitre() %> </h1>
-<br> Par : <%=topic.getNomCreateur() %>
-<br>
-<br>
+</div>
+<div class="commentaire">
+Par : <%=topic.getNomCreateur() %> <br>
+_________________
+<br></div>
+<div class="publi">Messages<br></div>
+
+<div class="commentaire">
 	<%
 	Collection<Message> listMessages = (Collection<Message>) request.getAttribute("listeMess");
 	if(listMessages != null){
@@ -43,8 +49,10 @@
 			<input type="submit" name="operation" value="commenterTopic">
 		</form>
 	<%} %>
-	<br>
-	<A HREF=index.html> Retour au menu.
-	</A>
+</div>
+<br>
+<A HREF=index.html> Retour au menu.
+</A>
+	
 </body>
 </html>

@@ -20,7 +20,7 @@
 <h1>Liste des cartes</h1>
 	<%Collection<Carte> listeCartes = (Collection<Carte>) request.getAttribute("liste_c");
 	for(Carte c : listeCartes){ %>
-		<%=c.getNom() %><br>
+		<h2><%=c.getNom() %><br></h2>
 		<img src=<%= c.getImage() %> /> <br>
     		
 	<%}%>

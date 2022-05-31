@@ -24,12 +24,12 @@ String usernameActif = (String) request.getSession().getAttribute("usernameActif
 if(usernameActif != null){%>
 	Jeton(s) disponibles : <%=(int) request.getAttribute("argents") %>
 	<br>
-	Vos cartes possédées : 
+	Vos cartes possédées : <br>
 	<%
 	Collection<Carte> cartesPossedees = (Collection<Carte>) request.getAttribute("cartePossedee");
 	//Collection<Carte> cartesPossedees = ((Compte) request.getSession().getAttribute("compteActif")).getCartes();
 	for(Carte c : cartesPossedees){ %>
-		<%=c.getNom()%>
+		<%=c.getNom()%><br>
 		<img src=<%= c.getImage() %> /> 
 		<br>
 	<%}%>
