@@ -23,7 +23,8 @@
 	for(Carte c : listeCartesPossedees){ 
 		int id = c.getId();%>
 		<input type = "radio" name = "carteId" value = "<%=id %>" <% if (first == 1) {%> checked <%}%>> 
-		<%=c.getNom() %>
+		<%=c.getNom() %><br>
+		<img src=<%= c.getImage() %> />
 		<%first = 0; %><br>
 	<%} if(first==0){ %>
 	<br>
